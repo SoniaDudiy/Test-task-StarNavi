@@ -10,7 +10,7 @@ from src.routes import search
 from src.routes import auth
 
 from src.database.db import get_db
-from src.routes import contacts, search, auth
+from src.routes import contacts, search, auth, comments
 
 app = FastAPI()
 
@@ -30,7 +30,7 @@ def healthchecker(db: Session = Depends(get_db)):
 app.include_router(auth.router)
 app.include_router(contacts.router)
 app.include_router(search.search)
-
+app.include_router(comments.router) 
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="localhost", port=8000, reload=True)

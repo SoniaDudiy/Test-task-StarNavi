@@ -50,3 +50,20 @@ class TokenModel(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+
+
+class CommentCreate(BaseModel):
+    content: str
+    post_id: int
+
+class CommentResponse(BaseModel):
+    id: int
+    content: str
+    created_at: datetime.datetime
+    updated_at: datetime.datetime
+    is_blocked: bool
+    post_id: int
+    user_id: int
+
+    class Config:
+        orm_mode = True

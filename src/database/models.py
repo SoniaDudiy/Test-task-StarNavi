@@ -48,3 +48,15 @@ class User(Base):
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
     roles = Column('roles', Enum(Role), default=Role.moderator)
+
+class Comment(Base):
+    __tablename__ = "comments"
+    id = Column(Integer, primary_key=True)
+    content = Column(String, nullable=False)
+    created_at = Column(DateTime, default=func.now())
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+    is_blocked = Column(Boolean, default=False)
+    post_id = Column(Integer, ForeignKey('posts.id', ondelete='CASCADE'))
+    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'))
+    post = relationship('Post', backref='comments')
+    user = relationship('User', backref='comments')
