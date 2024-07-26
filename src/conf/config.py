@@ -1,5 +1,4 @@
 class Config:
-    DB_URL = "postgresql+asyncpg://postgres:567234@localhost:5432/Rest_app"
+    DB_URL = "postgresql+psycopg2://postgres:example@localhost:5432/fastapi_db"
 
-
-config = Config
+config = Config()

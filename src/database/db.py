@@ -1,13 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from src.conf.config import config
 
-SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://postgres:567234@195.201.150.230:5433/hw11_sofia"
+SQLALCHEMY_DATABASE_URL = config.DB_URL
+
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
-
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
-# Dependency
 def get_db():
     db = SessionLocal()
     try:
