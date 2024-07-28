@@ -25,6 +25,7 @@ def run_migrations_offline() -> None:
         url=url,
         target_metadata=target_metadata,
         literal_binds=True,
+        as_sql=True,  # Додавання цього параметра дозволяє використовувати literal_binds
         dialect_opts={"paramstyle": "named"},
     )
 
@@ -36,16 +37,17 @@ def run_migrations_online() -> None:
     async def run_async_migrations():
         connectable = create_async_engine(app_config.DB_URL, echo=True, poolclass=pool.NullPool)
         async with connectable.connect() as connection:
-            context.configure(
-                connection=connection,
-                target_metadata=target_metadata,
-                literal_binds=True,
-                dialect_opts={"paramstyle": "named"},
-            )
-            with context.begin_transaction():
-                await context.run_migrations()
+            await connection.run_sync(do_run_migrations)
 
     asyncio.run(run_async_migrations())
+
+def do_run_migrations(connection):
+    context.configure(
+        connection=connection,
+        target_metadata=target_metadata,
+    )
+    with context.begin_transaction():
+        context.run_migrations()
 
 if context.is_offline_mode():
     run_migrations_offline()
