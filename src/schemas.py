@@ -1,20 +1,16 @@
 import datetime
-
 from pydantic import BaseModel, Field, EmailStr
-
 
 class ContactModel(BaseModel):
     firstname: str = Field(default='Unknown', min_length=1, max_length=50)
     lastname: str = Field(default='Unknown', min_length=2, max_length=50)
     email: EmailStr
     phone: str = Field(default='+38091534167', min_length=10, max_length=15)
-    birthday: datetime.date = Field(default='2023-01-09')
+    birthday: datetime.date = Field(default=datetime.date(2023, 1, 9))
     is_favorite: bool = False
-
 
 class ContactFavoriteModel(BaseModel):
     is_favorite: bool = False
-
 
 class ContactResponse(BaseModel):
     id: int
@@ -35,7 +31,6 @@ class UserModel(BaseModel):
     email: EmailStr
     password: str = Field(min_length=6, max_length=8)
 
-
 class UserResponse(BaseModel):
     id: int
     username: str
@@ -45,12 +40,10 @@ class UserResponse(BaseModel):
     class Config:
         orm_mode = True
 
-
 class TokenModel(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
-
 
 class CommentCreate(BaseModel):
     content: str

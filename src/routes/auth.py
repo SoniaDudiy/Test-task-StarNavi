@@ -1,3 +1,4 @@
+import logging
 from fastapi import Depends, HTTPException, status, APIRouter, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer, OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -10,6 +11,8 @@ router = APIRouter(prefix="/api/auth", tags=['auth'])
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/login")
 security = HTTPBearer()
+
+logger = logging.getLogger(__name__)
 
 @router.post("/signup", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 async def signup(body: UserModel, db: AsyncSession = Depends(get_db)):
@@ -30,14 +33,18 @@ async def login(body: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = 
     access_token = await auth_service.create_access_token(data={"sub": user.email})
     refresh_token = await auth_service.create_refresh_token(data={"sub": user.email})
     await repository_users.update_token(user, refresh_token, db)
+    logger.info(f"User: {user.email}, Refresh token stored: {user.refresh_token}")
     return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
 
 @router.get('/refresh_token', response_model=TokenModel)
 async def refresh_token(credentials: HTTPAuthorizationCredentials = Security(security), db: AsyncSession = Depends(get_db)):
     token = credentials.credentials
+    logger.info(f"Received token: {token}")
     email = await auth_service.decode_refresh_token(token)
     user = await repository_users.get_user_by_email(email, db)
+    logger.info(f"User: {user.email}, Stored refresh token: {user.refresh_token}")
     if user.refresh_token != token:
+        logger.info(f"Stored token: {user.refresh_token}")
         await repository_users.update_token(user, None, db)
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
 

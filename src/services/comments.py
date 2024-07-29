@@ -1,5 +1,4 @@
 from src.repository.comments import create_comment, get_comment_by_id, block_comment
-import re
 
 def contains_profanity(content: str) -> bool:
     profanity_list = ["badword1", "badword2"]

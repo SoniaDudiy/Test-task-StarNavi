@@ -10,7 +10,8 @@ async def get_user_by_email(email: str, db: AsyncSession) -> User | None:
 
 async def create_user(body: UserModel, db: AsyncSession):
     g = Gravatar(body.email)
-    new_user = User(**body.model_dump(), avatar=g.get_image())
+    avatar = g.get_image() or ""  # Перевірка на пустий результат
+    new_user = User(**body.model_dump(), avatar=avatar)
     db.add(new_user)
     await db.commit()
     await db.refresh(new_user)
@@ -18,4 +19,6 @@ async def create_user(body: UserModel, db: AsyncSession):
 
 async def update_token(user: User, refresh_token: str, db: AsyncSession):
     user.refresh_token = refresh_token
+    db.add(user)
     await db.commit()
+    await db.refresh(user)

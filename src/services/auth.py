@@ -55,6 +55,7 @@ class Auth:
 
     async def decode_refresh_token(self, refresh_token: str):
         try:
+            print(f"Decoding refresh token: {refresh_token}")  # Додано логування
             payload = jwt.decode(refresh_token, self.SECRET_KEY, algorithms=[self.ALGORITHM])
             if payload['scope'] == 'refresh_token':
                 email = payload['sub']

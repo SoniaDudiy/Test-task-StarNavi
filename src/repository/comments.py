@@ -3,11 +3,16 @@ from src.database.models import Comment
 from src.schemas import CommentCreate
 
 def create_comment(db: Session, comment: CommentCreate, user_id: int):
-    db_comment = Comment(**comment.dict(), user_id=user_id)
+    db_comment = Comment(
+        content=comment.content,
+        post_id=comment.post_id,
+        user_id=user_id
+    )
     db.add(db_comment)
     db.commit()
     db.refresh(db_comment)
     return db_comment
+
 
 def get_comments(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Comment).offset(skip).limit(limit).all()
