@@ -10,7 +10,7 @@ async def get_user_by_email(email: str, db: AsyncSession) -> User | None:
 
 async def create_user(body: UserModel, db: AsyncSession):
     g = Gravatar(body.email)
-    avatar = g.get_image() or ""  # Перевірка на пустий результат
+    avatar = g.get_image() or "" 
     new_user = User(**body.model_dump(), avatar=avatar)
     db.add(new_user)
     await db.commit()
