@@ -78,14 +78,14 @@ testing of comments, run the command in the console:
    ```
 testing of contacts, run the command in the console:
    ``` 
-   - pytest tests/test_unit_repository_contacts.py
+   pytest tests/test_unit_repository_contacts.py
    ```  
 testing of users, run the command in the console:
    ```
-   - pytest tests/test_unit_repository_users.py
+   pytest tests/test_unit_repository_users.py
    ```  
 search testing, run the command in the console:
   ```
-   - pytest tests/test_unit_repository_search.py
+  pytest tests/test_unit_repository_search.py
   ``` 
             
