@@ -75,7 +75,7 @@ testing of comments, run the command in the console:
 
    ```bash
    pytest tests/test_unit_repository_comments.py
-
+   ```
 testing of contacts, run the command in the console:
 
    - pytest tests/test_unit_repository_contacts.py
