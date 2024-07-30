@@ -7,16 +7,16 @@ This project is an API for managing contacts, users, and comments implemented wi
 # Main functionalities
 
 1. Authentication and authorization
-Signup (POST /api/auth/signup): Registration of a new user. You need to provide username, email and password. Response: new user data.
-Login (POST /api/auth/login): Log in to the system. You must provide username (email) and password. Response: access and update tokens.
-Refresh Token (GET /api/auth/refresh_token): Refresh access and upgrade tokens. Requires the Authorization header with the refresh token. Response: new tokens.
+- Signup (POST /api/auth/signup): Registration of a new user. You need to provide username, email and password. Response: new user data.
+- Login (POST /api/auth/login): Log in to the system. You must provide username (email) and password. Response: access and update tokens.
+- Refresh Token (GET /api/auth/refresh_token): Refresh access and upgrade tokens. Requires the Authorization header with the refresh token. Response: new tokens.
 2. Contacts
-Get Contacts (GET /api/contacts/): Get the list of contacts. Request parameters: limit and offset.
-Get Contact by ID (GET /api/contacts/{contact_id}): Get contacts by their ID.
-Create Contact (POST /api/contacts/): Create a new contact. You need to provide contact details.
-Update Contact (PUT /api/contacts/{contact_id}): Updates an existing contact by its ID.
-Delete Contact (DELETE /api/contacts/{contact_id}): Delete a contact by its ID.
-Set Favorite (PATCH /api/contacts/{contact_id}/favorite): Change the status of a favorite contact.
+- Get Contacts (GET /api/contacts/): Get the list of contacts. Request parameters: limit and offset.
+- Get Contact by ID (GET /api/contacts/{contact_id}): Get contacts by their ID.
+- Create Contact (POST /api/contacts/): Create a new contact. You need to provide contact details.
+- Update Contact (PUT /api/contacts/{contact_id}): Updates an existing contact by its ID.
+- Delete Contact (DELETE /api/contacts/{contact_id}): Delete a contact by its ID.
+- Set Favorite (PATCH /api/contacts/{contact_id}/favorite): Change the status of a favorite contact.
 3. Search for contacts
 Search by First Name (GET /api/search/firstname/{firstname}): Search for contacts by first name.
 Search by Last Name (GET /api/search/lastname/{lastname}): Search for contacts by last name.
