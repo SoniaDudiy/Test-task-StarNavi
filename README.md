@@ -69,11 +69,11 @@ OpenAPI documentation : http://127.0.0.1:8000/docs
 ![Screenshot](https://github.com/SoniaDudiy/Test-task-StarNavi/blob/main/fastapi%203.png)
 
 
-API має можливість виконувати наступні дії:
+# API tests can be run using 
 
-Створити новий контакт
-Отримати список всіх контактів
-Отримати один контакт за ідентифікатором
-Оновити існуючий контакт
-Видалити контакт
+testing of comments - pytest tests/test_unit_repository_comments.py
+testing of contacts - pytest tests/test_unit_repository_contacts.py
+testing of users - pytest tests/test_unit_repository_users.py
+search testing - pytest tests/test_unit_repository_search.py
+
             
