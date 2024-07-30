@@ -28,9 +28,10 @@ OpenAPI documentation : http://127.0.0.1:8000/docs
 
 # Screenshots of the program
 
-https://github.com/SoniaDudiy/Test-task-StarNavi/blob/main/fastapi%201.png
+
 ![Screenshot](https://github.com/SoniaDudiy/Test-task-StarNavi/blob/main/fastapi%201.png)
 
+![Screenshot](https://github.com/SoniaDudiy/Test-task-StarNavi/blob/main/fastapi%202.png)
 
-
+![Screenshot](https://github.com/SoniaDudiy/Test-task-StarNavi/blob/main/fastapi%203.png)
             
