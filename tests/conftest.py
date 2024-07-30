@@ -1,5 +1,4 @@
-from unittest.mock import MagicMock
-
+from unittest.mock import MagicMock, AsyncMock
 import pytest
 from fastapi.testclient import TestClient
 from fastapi_limiter.depends import RateLimiter
@@ -10,7 +9,6 @@ from main import app
 from src.database.models import Base, User
 from src.database.db import get_db
 
-
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 
 engine = create_engine(
@@ -18,11 +16,9 @@ engine = create_engine(
 )
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
 @pytest.fixture(scope="module")
 def session():
     # Create the database
-
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
@@ -32,11 +28,9 @@ def session():
     finally:
         db.close()
 
-
 @pytest.fixture(scope="module")
 def client(session):
     # Dependency override
-
     def override_get_db():
         try:
             yield session
@@ -44,9 +38,7 @@ def client(session):
             session.close()
 
     app.dependency_overrides[get_db] = override_get_db
-
     yield TestClient(app)
-
 
 @pytest.fixture(scope="module")
 def user():
@@ -59,25 +51,22 @@ def user():
         "roles": "admin",
         "confirmed": False,
         "password_reset_token": "some string"
-
     }
 
-
 @pytest.fixture(scope="function")
-def token(client, user, session, monkeypatch):
-    mock_send_email = MagicMock()
+async def token(client, user, session, monkeypatch):
+    mock_send_email = AsyncMock()
     monkeypatch.setattr("src.routes.auth.send_email", mock_send_email)
-    client.post("/api/auth/signup", json=user)
+    response = await client.post("/api/auth/signup", json=user)
     current_user: User = session.query(User).filter(User.email == user.get('email')).first()
     current_user.confirmed = True
     session.commit()
-    response = client.post(
+    response = await client.post(
         "/api/auth/login",
         data={"username": user.get('email'), "password": user.get('password')},
     )
     data = response.json()
     return data["access_token"]
-
 
 @pytest.fixture(scope="module")
 def contact():

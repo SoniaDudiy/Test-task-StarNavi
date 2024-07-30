@@ -21,6 +21,7 @@ class User(Base):
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
     roles = Column(Enum(Role), default=Role.moderator)
+    confirmed = Column(Boolean, default=False)  # Add this line
 
 class Post(Base):
     __tablename__ = "posts"

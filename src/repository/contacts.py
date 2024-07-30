@@ -30,8 +30,10 @@ async def update(contact_id: int, body: ContactModel, db: Session):
         contact.email = body.email
         contact.phone = body.phone
         contact.birthday = body.birthday
+        contact.is_favorite = body.is_favorite
         db.commit()
     return contact
+
 
 
 async def remove(contact_id: int, db: Session):
