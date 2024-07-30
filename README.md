@@ -72,12 +72,16 @@ OpenAPI documentation : http://127.0.0.1:8000/docs
 # API tests can be run using 
 
 - testing of comments, run the command in the console:
+  
    - pytest tests/test_unit_repository_comments.py
 - testing of contacts, run the command in the console:
+  
    - pytest tests/test_unit_repository_contacts.py
 - testing of users, run the command in the console:
+  
    - pytest tests/test_unit_repository_users.py
 - search testing, run the command in the console:
+  
    - pytest tests/test_unit_repository_search.py
 
             
