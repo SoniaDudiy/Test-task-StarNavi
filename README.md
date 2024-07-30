@@ -18,19 +18,19 @@ This project is an API for managing contacts, users, and comments implemented wi
 - Delete Contact (DELETE /api/contacts/{contact_id}): Delete a contact by its ID.
 - Set Favorite (PATCH /api/contacts/{contact_id}/favorite): Change the status of a favorite contact.
 3. Search for contacts
-Search by First Name (GET /api/search/firstname/{firstname}): Search for contacts by first name.
-Search by Last Name (GET /api/search/lastname/{lastname}): Search for contacts by last name.
-Search by Email (GET /api/search/email/{email}): Search for contacts by email.
-Search by Phone (GET /api/search/phone/{phone}): Search for contacts by phone.
-Get Birthday List (GET /api/search/shift/{shift}): Get a list of contacts whose birthday is in shift days.
+- Search by First Name (GET /api/search/firstname/{firstname}): Search for contacts by first name.
+- Search by Last Name (GET /api/search/lastname/{lastname}): Search for contacts by last name.
+- Search by Email (GET /api/search/email/{email}): Search for contacts by email.
+- Search by Phone (GET /api/search/phone/{phone}): Search for contacts by phone.
+- Get Birthday List (GET /api/search/shift/{shift}): Get a list of contacts whose birthday is in shift days.
 4. Comments.
-Create Comment (POST /api/comments/): Add a new comment to a post. You need to provide content and post_id.
-Read Comments (GET /api/comments/): Get the list of comments with skip and limit parameters.
-Read Comment by ID (GET /api/comments/{comment_id}): Get a comment by its ID.
-Update Comment (PUT /api/comments/{comment_id}): Update a comment by its ID.
-Delete Comment (DELETE /api/comments/{comment_id}): Deletes a comment by its ID.
-Block Comment (POST /api/comments/block/{comment_id}): Block a comment.
-Comments Daily Breakdown (GET /api/comments-daily-breakdown): Get a daily breakdown of comments for a specific period (date_from and date_to).
+- Create Comment (POST /api/comments/): Add a new comment to a post. You need to provide content and post_id.
+- Read Comments (GET /api/comments/): Get the list of comments with skip and limit parameters.
+- Read Comment by ID (GET /api/comments/{comment_id}): Get a comment by its ID.
+- Update Comment (PUT /api/comments/{comment_id}): Update a comment by its ID.
+- Delete Comment (DELETE /api/comments/{comment_id}): Deletes a comment by its ID.
+- Block Comment (POST /api/comments/block/{comment_id}): Block a comment.
+- Comments Daily Breakdown (GET /api/comments-daily-breakdown): Get a daily breakdown of comments for a specific period (date_from and date_to).
 
 
 
